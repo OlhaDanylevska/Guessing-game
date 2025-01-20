@@ -4,7 +4,6 @@ import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
 import MyButton from "../button"
-import { Link } from 'react-router-dom';
 import Logo from "./../../assets/logo3.png"
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -19,7 +18,7 @@ function Home({ setRunTimer, setTries, setLettersArray, setLetterState, setRight
 
   useEffect(() => {
     setIsLoading(true);
-    fetch('https://xlydncqzxjlbypyacjxs.supabase.co/default-words/random')
+    fetch('https://guessing-word-game-september.onrender.com/default-words/random')
       .then((res) => {
         if (!res.ok) {
           throw new Error('Network response was not ok');
@@ -40,6 +39,7 @@ function Home({ setRunTimer, setTries, setLettersArray, setLetterState, setRight
 
   const handleStart = () => {
     if (!error && randomWordSt.length > 0) {
+      console.log("button clicked");
       setLetterState("pending");
       setRunTimer(true);
       setRightLetters([]);
@@ -50,6 +50,8 @@ function Home({ setRunTimer, setTries, setLettersArray, setLetterState, setRight
       setLettersArray(randomWordSt.toUpperCase().split(""));
       setTries(randomWordSt.length * 2)
       navigate("/start-new-game");
+    } else if (error) {
+      console.log("error")
     }
   };
 
