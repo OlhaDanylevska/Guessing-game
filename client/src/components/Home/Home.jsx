@@ -19,7 +19,7 @@ function Home({ setRunTimer, setTries, setLettersArray, setLetterState, setRight
 
   useEffect(() => {
     setIsLoading(true);
-    fetch('https://guessing-word-game-september.onrender.com/default-words/random')
+    fetch('https://xlydncqzxjlbypyacjxs.supabase.co/default-words/random')
       .then((res) => {
         if (!res.ok) {
           throw new Error('Network response was not ok');
