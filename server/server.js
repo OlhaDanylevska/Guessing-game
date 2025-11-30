@@ -18,11 +18,13 @@ const pool = new Pool({
 
 pool.connect((err, client, done) => {
     if (err) {
-        console.error("Error connecting to the database:", err);
+        console.error("❌ Error connecting to the database:", err);
     } else {
+        console.log("✅ Successfully connected to Supabase Postgres");
         client.release();
     }
 });
+
 
 pool.on("error", (err, client) => {
     console.error("Unexpected error on idle client", err);
