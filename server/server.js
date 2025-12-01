@@ -1,4 +1,4 @@
-const express = require("express");
+import express from "express";
 const app = express();
 const port = process.env.PORT || 4000;
 const cors = require("cors");
@@ -10,6 +10,8 @@ const dotenv = require("dotenv");
 dotenv.config();
 import pkg from "pg";
 import dns from "dns";
+
+
 
 const { Pool } = pkg;
 
