@@ -9,6 +9,13 @@ app.use(cors());
 const dotenv = require("dotenv");
 dotenv.config();
 
+console.log("DB_URL in this environment:", process.env.DB_URL);
+console.log(
+  "DB host in this environment:",
+  new URL(process.env.DB_URL).hostname
+);
+
+
 const { Pool } = require("pg");
 
 const pool = new Pool({
@@ -24,6 +31,7 @@ pool.connect((err, client, done) => {
         client.release();
     }
 });
+
 
 
 pool.on("error", (err, client) => {
