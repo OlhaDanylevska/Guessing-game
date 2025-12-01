@@ -8,20 +8,21 @@ app.use(cors());
 
 const dotenv = require("dotenv");
 dotenv.config();
+import pkg from "pg";
+import dns from "dns";
+
+const { Pool } = pkg;
 
 console.log("DB_URL in this environment:", process.env.DB_URL);
-console.log(
-  "DB host in this environment:",
-  new URL(process.env.DB_URL).hostname
-);
-
-
-const { Pool } = require("pg");
 
 const pool = new Pool({
-    connectionString: process.env.DB_URL,
-    ssl: { rejectUnauthorized: false },
+  connectionString: process.env.DB_URL, // your Supabase URL
+  ssl: { rejectUnauthorized: false },
+  lookup: (hostname, options, callback) => {
+    return dns.lookup(hostname, { family: 4, all: false }, callback);
+  },
 });
+
 
 pool.connect((err, client, done) => {
     if (err) {
